@@ -43,11 +43,10 @@ var prepareTrials = function(data) {
                         text: word, //inserts the word from each row of csv file
                     };
 
-                    // here you can set the color/size/font of the stimulus
+                    // here you can set the css styles of the stim
                     stim.style = [
-                        "color:rgb(0,0,0)",
-                        "font-size:10vw",
-                        "font-family:courier",
+                        "font-size:" + fontSize,
+                        "font-family:" + font,
                         "position:absolute",
                         "top:50%",
                         "left:50%",

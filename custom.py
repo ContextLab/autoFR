@@ -48,8 +48,15 @@ import pickle
 # import multiprocessing for speech decoding
 import multiprocessing as q
 
+@custom_code.route('/create-audio-folder',methods=['POST'])
+def createFolder():
+    print('creating audio folder...')
+    call('mkdir audio/' + request.form['data'],shell=True)
+    resp = {"folderCreated": "success"}
+    return jsonify(**resp)
+
 @custom_code.route('/save-audio-and-decode',methods=['POST'])
-def saveAndReturn():
+def saveAndDecode():
     filename = request.form['audio-filename']
     foldername = request.form['audio-foldername']
     wav = request.files
@@ -106,28 +113,3 @@ def saveAndReturn():
         wr.writerow(words)
     resp = {"result" : json.dumps(words)}
     return jsonify(**resp)
-
-# @custom_code.route('/save-audio',methods=['POST'])
-# def saveAudio():
-#     filename = request.form['audio-filename']
-#     foldername = request.form['audio-foldername']
-#     wav = request.files
-#     wav['audio-blob'].save("audio/" + foldername + "/" + filename)
-#     audio = AudioSegment.from_wav("audio/" + foldername + "/" + filename)
-#     audio.export("audio/" + foldername + "/" + filename + ".flac", format = "flac", bitrate="44.1k")
-#     resp = {"audioSaved": "success"}
-#     return jsonify(**resp)
-
-@custom_code.route('/create-audio-folder',methods=['POST'])
-def createFolder():
-    print('creating audio folder...')
-    call('mkdir audio/' + request.form['data'],shell=True)
-    resp = {"folderCreated": "success"}
-    return jsonify(**resp)
-
-# @custom_code.route('/decode-experiment',methods=['POST'])
-# def decodeExperiment():
-#     print(request.form['data'])
-#     # call('node ~/Documents/BitBucket/cloud-speech/recognize -f ' + cwd + '/audio/' + request.form['data'] + '/' + ' -c ' + cwd + '/static/files/speech-context.csv',shell=True)
-#     resp = {"audioDecoded": "success"}
-#     return jsonify(**resp)
