@@ -1,2 +1,2 @@
-# autoFR-template-experiment
-A free recall experiment template with automatic audio transcription
+# autoFR
+A free recall experiment template with automated speech decoding
