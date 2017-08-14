@@ -1,6 +1,7 @@
-.DS_Store
-participants.db
+exp/autoFR/google-credentials/credentials.json
+data/*
+exp/autoFR/audio/
+exp/autoFR/server.log
+exp/autoFR/.psiturk_history
 *.pyc
-.psiturk_history
-audio/
-server.log
+*.DS_Store

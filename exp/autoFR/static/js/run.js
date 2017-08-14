@@ -1,14 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 // RUN THE EXPERIMENT //////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
 var options = {
   show: true,
   mode: mode
 };
 loadStimuli.then(function(loadedFileData) {
   prepareTrials(loadedFileData).then(function(trials) {
-    runExperiment(trials, options, function() {
-      runPostQuestionnaire(options);
-    });
+    runExperiment(trials, options)
   });
 });

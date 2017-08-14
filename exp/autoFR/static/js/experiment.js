@@ -7,7 +7,7 @@ var data = { //data object to keep track of recalled words
     correctWords: []
 };
 
-var runExperiment = function(stimArray, options, cb) {
+var runExperiment = function(stimArray, options) {
 
     if (mode === 'lab') {
         var instructionsTimeline = setupInstructions();
@@ -114,14 +114,12 @@ var runExperiment = function(stimArray, options, cb) {
                         $.post("/decode-experiment", {
                             "data": uniqueId
                         });
-                        cb();
                     }
                 })
             } else {
                 $.post("/decode-experiment", {
                     "data": uniqueId
                 });
-                cb();
             }
         },
         on_data_update: function(data) {

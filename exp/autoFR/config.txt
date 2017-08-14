@@ -12,7 +12,7 @@ organization_name = Dartmouth College
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
-database_url = sqlite:///participants.db
+database_url = mysql://psiturk:psiturk@db:3306/participants
 table_name = turkdemo
 
 [Server Parameters]
@@ -25,7 +25,6 @@ debug = true
 login_username = examplename
 login_pw = examplepassword
 threads = auto
-secret_key = 'this is my secret key which is hard to guess, i should change this'
 
 [Task Parameters]
 experiment_code_version = 1.0
