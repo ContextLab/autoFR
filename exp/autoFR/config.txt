@@ -16,7 +16,7 @@ database_url = mysql://psiturk:psiturk@db:3306/participants
 table_name = turkdemo
 
 [Server Parameters]
-host = localhost
+host = 0.0.0.0
 port = 22362
 cutoff_time = 120
 logfile = server.log
