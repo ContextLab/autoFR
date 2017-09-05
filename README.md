@@ -1,5 +1,5 @@
-# autoFR
-A free recall experiment template with automated speech decoding.  We've implemented the experiment using [jsPsych](http://www.jspsych.org/) and [psiTurk](https://psiturk.org/) for easy deployment on [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome).  (You can also follow the instructions below to run the experiment locally.)
+# Overview
+AutoFR is a verbal free recall experiment that incorporates automatic speech-to-text processing by wrapping the [Google Cloud Speech API](https://cloud.google.com/speech).  We've implemented the experiment using [jsPsych](http://www.jspsych.org/) and [psiTurk](https://psiturk.org/) for easy deployment on [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome).  (You can also follow the instructions below to run the experiment locally.)  This code may be used "as is," or it may be used as a template to create your own variants of this experiment.
 
 # Installing autoFR
 + Install [Docker](https://www.docker.com/) and [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
