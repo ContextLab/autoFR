@@ -16,7 +16,7 @@ A free recall experiment template with automated speech decoding
 + Point your Google Chrome browser to the randomized link returned and follow the on-screen instructions to run in the experiment!
 
 # Analyzing the data
-We've created [Quail](http://cdl-quail.readthedocs.io/en/latest/), a Python toolbox for analyzing and plotting free recall data. To analyze data using quail, follow this example code:
+We've created [Quail](http://cdl-quail.readthedocs.io/en/latest/), a Python toolbox for analyzing and plotting free recall data.  Detailed instructions may be found [here](http://cdl-quail.readthedocs.io/en/latest/tutorial.html); in summary, Quail relies on a data structure called an `egg`.  To create an `egg` object from the data you collect from this experiment (so that you can analyze it with Quail, make plots, etc.), follow the example code below:
 
 ```
 import quail
