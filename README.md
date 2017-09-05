@@ -1,5 +1,5 @@
 # autoFR
-A free recall experiment template with automated speech decoding
+A free recall experiment template with automated speech decoding.  We've implemented the experiment using [jsPsych](http://www.jspsych.org/) and [psiTurk](https://psiturk.org/) for easy deployment on [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome).  (You can also follow the instructions below to run the experiment locally.)
 
 # Installing autoFR
 + Install [Docker](https://www.docker.com/) and [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
