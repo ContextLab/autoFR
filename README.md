@@ -34,10 +34,10 @@ remove_subs = ['debugV2WLPQ:debugQN6O0V', 'debugFIGADU:debugPSS00O', 'debugZ5SE8
 wordpool = '~/exp/autoFR/static/files/cut_wordpool.csv'
 
 # experiment version (defined in autoFR/config.txt)
-experiments = ['0.0']
+experiments = ['0.0', '1.0', '1.1', '6.1', '7.1', '8.1']
 
 # optionally group experiments with different versions into a single egg
-groupby = {'exp_version': [['0.0', '1.0', '1.1'], '6.1','7.1','8.1']}
+groupby = {'exp_version': [['0.0', '1.0', '1.1'], '6.1', '7.1', '8.1']}
 
 # generate a list of `eggs` of len(groupby['exp_version'])
 eggs = quail.load(dbpath=dbpath, recpath=recpath, remove_subs=remove_subs,
