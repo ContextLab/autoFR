@@ -18,6 +18,8 @@ from json import dumps, loads
 from subprocess import call
 import os
 import csv
+import sys
+import traceback
 cwd = os.getcwd()
 
 # load the configuration options
@@ -45,71 +47,72 @@ from pydub import AudioSegment
 # import pickle to save google speech results
 import pickle
 
-# import multiprocessing for speech decoding
-import multiprocessing as q
+# import quail for speech decoding
+import quail
 
 @custom_code.route('/create-audio-folder',methods=['POST'])
-def createFolder():
+def create_folder():
     print('creating audio folder...')
     call('mkdir audio/' + request.form['data'],shell=True)
     resp = {"folderCreated": "success"}
     return jsonify(**resp)
 
-@custom_code.route('/save-audio-and-decode',methods=['POST'])
-def saveAndDecode():
+@custom_code.route('/save-audio',methods=['POST'])
+def save_audio():
     filename = request.form['audio-filename']
     foldername = request.form['audio-foldername']
     wav = request.files
-    wav['audio-blob'].save("audio/" + foldername + "/" + filename)
-    audio = AudioSegment.from_wav("audio/" + foldername + "/" + filename)
-    audio.export("audio/" + foldername + "/" + filename + ".flac", format = "flac", bitrate="44.1k")
-    with open("audio/" + foldername + "/" + filename + ".flac", 'rb') as sc:
-        speech_content = sc.read()
-    sample = client.sample(content=speech_content,
-                        encoding=speech.Encoding.FLAC,
-                        sample_rate=44100)
-    def recognize(sample, foldername, filename):
-        results = sample.sync_recognize(language_code='en-US', max_alternatives=1,
-                                        speech_context=speech_context) #note: max 500 words for speech context
-        pickle.dump( results, open( "audio/" + foldername + "/" + filename + ".flac.pickle", "wb" ) )
-        words = []
-        for result in results:
-            for chunk in result.transcript.split(' '):
-                print(chunk)
-                if chunk != '':
-                    words.append(str(chunk).upper())
-        with open("audio/" + foldername + "/" + filename + ".flac.txt", 'wb') as myfile:
-            wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-            wr.writerow(words)
-    p = q.Process(target=recognize, args=(sample, foldername, filename))
-    p.start()
-    resp = {"audioDecoded" : "success"}
+    try:
+        wav['audio-blob'].save("audio/" + foldername + "/" + filename)
+        resp = {"audioSaved" : "success"}
+    except:
+        print('Error with saving audio.')
+        resp = {"audioSaved" : "failed"}
     return jsonify(**resp)
 
-@custom_code.route('/save-audio-and-return-transcript',methods=['POST'])
-def saveAndReturn():
-    filename = request.form['audio-filename']
-    foldername = request.form['audio-foldername']
-    wav = request.files
-    wav['audio-blob'].save("audio/" + foldername + "/" + filename)
-    audio = AudioSegment.from_wav("audio/" + foldername + "/" + filename)
-    audio.export("audio/" + foldername + "/" + filename + ".flac", format = "flac", bitrate="44.1k")
-    with open("audio/" + foldername + "/" + filename + ".flac", 'rb') as sc:
-        speech_content = sc.read()
-    sample = client.sample(content=speech_content,
-                        encoding=speech.Encoding.FLAC,
-                        sample_rate=44100)
-    results = sample.sync_recognize(language_code='en-US', max_alternatives=1,
-                                    speech_context=speech_context) #note: max 500 words for speech context
-    pickle.dump( results, open( "audio/" + foldername + "/" + filename + ".flac.pickle", "wb" ) )
-    words = []
-    for result in results:
-        for chunk in result.transcript.split(' '):
-            print(chunk)
-            if chunk != '':
-                words.append(str(chunk).upper())
-    with open("audio/" + foldername + "/" + filename + ".flac.txt", 'wb') as myfile:
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-        wr.writerow(words)
-    resp = {"result" : json.dumps(words)}
+@custom_code.route('/decode-experiment',methods=['POST'])
+def decode_experiment():
+    foldername = request.form['data']
+    try:
+        words = quail.decode_speech(path='audio/' + foldername + '/',
+            keypath='google-credentials/credentials.json',
+            save=True,
+            speech_context=speech_context)
+        resp = {"audioDecoded" : "success"}
+    except:
+        print('Error decoding audio.')
+        traceback.print_exc()
+        resp = {"audioDecoded" : "failed"}
     return jsonify(**resp)
+
+# @custom_code.route('/save-audio-and-return-transcript',methods=['POST'])
+# def save_audio_and_return():
+#     filename = request.form['audio-filename']
+#     foldername = request.form['audio-foldername']
+#     wav = request.files
+#     wav['audio-blob'].save("audio/" + foldername + "/" + filename)
+#     audio = AudioSegment.from_wav("audio/" + foldername + "/" + filename)
+#     audio.export("audio/" + foldername + "/" + filename + ".flac", format = "flac", bitrate="44.1k")
+#     with open("audio/" + foldername + "/" + filename + ".flac", 'rb') as sc:
+#         speech_content = sc.read()
+#     sample = client.sample(content=speech_content,
+#                         encoding=speech.Encoding.FLAC,
+#                         sample_rate_hertz=44100)
+#     try:
+#         results = sample.recognize(language_code='en-US', max_alternatives=1,
+#                                         speech_contexts=speech_context) #note: max 500 words for speech context
+#         pickle.dump( results, open( "audio/" + foldername + "/" + filename + ".flac.pickle", "wb" ) )
+#         words = []
+#         for result in results:
+#             for chunk in result.transcript.split(' '):
+#                 print(chunk)
+#                 if chunk != '':
+#                     words.append(str(chunk).upper())
+#         with open("audio/" + foldername + "/" + filename + ".flac.txt", 'wb') as myfile:
+#             wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+#             wr.writerow(words)
+#         resp = {"result" : json.dumps(words)}
+#     except:
+#         traceback.print_exc()
+#         resp = {"result" : "Error"}
+#     return jsonify(**resp)

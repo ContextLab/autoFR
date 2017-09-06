@@ -1,22 +1,9 @@
 version: '3'
 services:
-  db:
-    image: mysql:latest
-    volumes:
-     - ./data/db:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: psipsi
-      MYSQL_DATABASE: participants
-      MYSQL_USER: psiturk
-      MYSQL_PASSWORD: psiturk
-
   psiturk:
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/psiturk/autoFR/google-credentials/credentials.json
     build: .
-    links:
-     - db
     ports:
      - 22362:22362
     volumes:
@@ -24,8 +11,3 @@ services:
     tty: true
     stdin_open: true
     restart: always
-
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080

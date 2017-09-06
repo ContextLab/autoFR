@@ -9,15 +9,18 @@ AutoFR is a verbal free recall experiment that incorporates automatic speech-to-
 + Set up Google Cloud Speech following [these](http://cdl-quail.readthedocs.io/en/latest/tutorial/speech_decoding.html#setting-up-the-google-speech-api) instructions. Once you have a JSON formatted API keyfile downloaded, put in in the exp/autoFR/google-credentials folder, renaming it credentials.json.
 
 # Running autoFR
++ Run docker
 + Navigate to the cloned repo in terminal and type `docker-compose up -d` (this may take a little while)
 + Then, type: `docker attach autofr_psiturk_1`
 + Navigate to the experiment folder: `cd autoFR`
 + Type `psiturk`.  This should spin up a psiturk server
 + Then, type: `server on` (you may get an error the first time you try this, but try it again).
 + Then type `debug` <-this will initialize a local version of the experiment.
-+ Point your Google Chrome browser to the randomized link returned and follow the on-screen instructions to run in the experiment!
++ Point your Google Chrome browser to `localhost:22362` and follow the on-screen instructions to run in the experiment!
 
 # Analyzing the data
+The audio data is stored in the folder `autoFR/audio`.  Each new subject's data is put in a folder with a unique name.  At the end of an experiment, the audio data is automatically shipped off to Google Speech, and a text file and response object will be saved out for each list.
+
 We've created [Quail](http://cdl-quail.readthedocs.io/en/latest/), a Python toolbox for analyzing and plotting free recall data.  Detailed instructions may be found [here](http://cdl-quail.readthedocs.io/en/latest/tutorial.html); in summary, Quail relies on a data structure called an `egg`.  To create an `egg` object from the data you collect from this experiment (so that you can analyze it with Quail, make plots, etc.), follow the example code below:
 
 ```

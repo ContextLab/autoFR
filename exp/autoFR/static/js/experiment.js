@@ -78,7 +78,6 @@ var runExperiment = function(stimArray, options) {
             trial_duration: recordTime * 1000 + 2000,
             record_audio: true,
             speech_recognition: 'google',
-            return_speech: returnSpeech,
             data: {
                 listNumber: listNumber,
             },
@@ -114,12 +113,14 @@ var runExperiment = function(stimArray, options) {
                         $.post("/decode-experiment", {
                             "data": uniqueId
                         });
+                        psiTurk.completeHIT();
                     }
                 })
             } else {
                 $.post("/decode-experiment", {
                     "data": uniqueId
                 });
+                psiTurk.completeHIT();
             }
         },
         on_data_update: function(data) {

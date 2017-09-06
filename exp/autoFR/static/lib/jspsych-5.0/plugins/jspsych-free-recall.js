@@ -72,12 +72,7 @@ jsPsych.plugins["free-recall"] = (function() {
         var request = new XMLHttpRequest();
         request.timeout = 60000; // time in milliseconds
 
-        if(trial.return_speech==true){
-          request.open("POST", "/save-audio-and-return-transcript");
-        } else {
-          request.open("POST", "/save-audio-and-decode");
-        }
-
+        request.open("POST", "/save-audio");
         request.send(formData);
 
         display_element.append($('<div>', {

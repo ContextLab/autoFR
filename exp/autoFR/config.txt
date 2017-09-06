@@ -12,7 +12,7 @@ organization_name = Dartmouth College
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
-database_url = mysql://psiturk:psiturk@db:3306/participants
+database_url = sqlite:///participants.db
 table_name = turkdemo
 
 [Server Parameters]

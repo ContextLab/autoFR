@@ -12,7 +12,8 @@ RUN eatmydata apt-get install -y \
     procps \
     git \
     curl \
-    yasm
+    yasm \
+    python-tk
 RUN rm -rf /var/lib/apt/lists/*
 
 # install python packages
@@ -23,11 +24,12 @@ requests \
 mysql-python \
 psiturk \
 google-cloud-speech \
-pydub
+pydub \
+quail
 
 # install ffmpeg
-RUN git clone http://source.ffmpeg.org/git/ffmpeg.git
-RUN cd ffmpeg && ./configure --enable-gpl && \
+RUN git clone https://github.com/FFmpeg/FFmpeg
+RUN cd FFmpeg && ./configure --enable-gpl && \
 make && make install && ldconfig
 
 # setup working directory
