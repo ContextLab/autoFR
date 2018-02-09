@@ -18,7 +18,7 @@ AutoFR is a verbal free recall experiment that incorporates automatic speech-to-
 + Then type `debug` <-this will initialize a local version of the experiment.
 + Point your Google Chrome browser to `localhost:22362` and follow the on-screen instructions to run in the experiment!
 
-**IMPORTANT NOTE** Make sure you have pop-up blockers turned OFF!!
+**IMPORTANT NOTE:** Make sure you have pop-up blockers turned OFF!!
 
 # Analyzing the data
 The audio data is stored in the folder `autoFR/audio`.  Each new subject's data is put in a folder with a unique name.  At the end of an experiment, the audio data is automatically shipped off to Google Speech, and a text file and response object will be saved out for each list.
