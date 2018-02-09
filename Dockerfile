@@ -23,6 +23,7 @@ setuptools \
 requests \
 mysql-python \
 psiturk \
+google-cloud \
 google-cloud-speech \
 pydub \
 quail
