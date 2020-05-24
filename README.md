@@ -6,7 +6,9 @@ AutoFR is a verbal free recall experiment that incorporates automatic speech-to-
 # Installing autoFR
 + Install [Docker](https://www.docker.com/) and [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
 + Clone this repo: `git clone https://github.com/ContextLab/autoFR.git`
-+ Set up Google Cloud Speech following [these](http://cdl-quail.readthedocs.io/en/latest/tutorial/speech_decoding.html#setting-up-the-google-speech-api) instructions. Once you have a JSON formatted API keyfile downloaded, put in in the exp/autoFR/google-credentials folder, renaming it credentials.json.
++ Set up Google Cloud Speech following [these](http://cdl-quail.readthedocs.io/en/latest/tutorial/speech_decoding.html#setting-up-the-google-speech-api) instructions. (see `exp/autoFR/google-credentials/credentials.json` for an empty template). Once you have a JSON formatted API keyfile downloaded, replace the empty template with it, renaming this new JSON to `credentials.json`.
++ Insert your `aws_access_key_id` and `aws_secret_access_key` in the file `exp/.psyturkconfig`. This file appears hidden, so you may have to change your file explorer's visibility settings to find and open it. You may also add your `psiturk_access_key_id` and `psiturk_secret_access_id` to this file, though it is not necessary to run the experiment locally.
++ Create an empty folder called `exp/audio`, which is where the participant data will be stored.
 
 # Running autoFR
 + Run docker

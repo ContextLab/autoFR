@@ -33,8 +33,8 @@ custom_code = Blueprint('custom_code', __name__, template_folder='templates', st
 # Google speech
 import base64
 import json
-from google.cloud import speech
-client = speech.Client()
+from google.cloud import speech_v1
+client = speech_v1.SpeechClient()
 
 # load in speech context
 with open('static/files/speech-context.csv', 'rb') as csvfile:
